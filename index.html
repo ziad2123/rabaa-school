@@ -1,0 +1,1423 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مدرسة رابعة الثانوية المشتركة | البوابة الرسمية</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body { font-family: 'Cairo', sans-serif; background-color: #f8fafc; overflow-x: hidden; }
+        .moe-navy { background-color: #0b1f3a; }
+        .moe-navy-light { background-color: #13315c; }
+        .moe-gold { color: #d4af37; }
+        .moe-gold-bg { background-color: #d4af37; }
+        .moe-gold-border { border-color: #d4af37; }
+        
+        @keyframes ticker {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        .ticker-wrap { overflow: hidden; white-space: nowrap; position: relative; }
+        .ticker-move { display: inline-block; animation: ticker 28s linear infinite; }
+        .ticker-move:hover { animation-play-state: paused; }
+
+        .custom-scroll::-webkit-scrollbar { height: 6px; width: 6px; }
+        .custom-scroll::-webkit-scrollbar-track { background: #f1f5f9; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; }
+            #schedule { padding: 0; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased selection:bg-amber-500 selection:text-white">
+
+    <!-- مؤشر المزامنة السحابية -->
+    <div id="cloudStatusBanner" class="hidden bg-emerald-700 text-white text-xs py-1 px-4 text-center font-bold no-print">
+        <i class="fa-solid fa-cloud-arrow-up ml-1"></i> متصل بالسحابة: التعديلات تظهر لجميع الطلاب والزوار فوراً
+    </div>
+
+    <!-- الشريط العلوي الرسمي -->
+    <div class="moe-navy text-slate-200 text-xs py-2 px-4 border-b border-amber-500/30 no-print">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+            <div class="flex items-center gap-3">
+                <span class="flex items-center gap-1.5 font-semibold text-amber-400">
+                    <i class="fa-solid fa-landmark"></i> وزارة التربية والتعليم والتعليم الفني
+                </span>
+                <span class="hidden sm:inline text-slate-500">|</span>
+                <span class="hidden sm:inline">مديرية التربية والتعليم بشمال سيناء - إدارة بئر العبد التعليمية</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <span id="currentDateDisplay" class="text-slate-300 font-medium"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- الهيدر الرئيسي (ثابت غير متحرك مع النزول) -->
+    <header class="bg-white shadow-md border-b-4 moe-gold-border no-print">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-wrap justify-between items-center gap-4">
+            <div class="flex items-center gap-4">
+                <div class="w-14 h-14 rounded-full moe-navy flex items-center justify-center border-2 moe-gold-border shadow-inner shrink-0">
+                    <i class="fa-solid fa-graduation-cap text-2xl moe-gold"></i>
+                </div>
+                <div>
+                    <div class="text-xs font-bold text-amber-700 tracking-wide">جمهورية مصر العربية - محافظة شمال سيناء</div>
+                    <h1 class="text-xl sm:text-2xl font-black text-slate-900">مدرسة رابعة الثانوية المشتركة</h1>
+                    <p class="text-xs text-slate-500 font-semibold">البوابة الإلكترونية الرسمية والخدمات الطلابية</p>
+                </div>
+            </div>
+
+            <nav class="flex flex-wrap items-center gap-1 sm:gap-2 text-sm font-bold">
+                <a href="#hero" class="px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-700 transition">الرئيسية</a>
+                <a href="#services" class="px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-700 transition">الخدمات الإلكترونية</a>
+                <a href="#schedule" class="px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-700 transition">جداول الحصص</a>
+                <a href="#honors" class="px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-700 transition">لوحة الشرف</a>
+                <a href="#gallery" class="px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-700 transition">معرض المدرسة</a>
+                <a href="#contact" class="px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-700 transition">الشكاوى والمقترحات</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- شريط الأخبار العاجلة -->
+    <div class="moe-navy-light text-white py-2.5 px-4 shadow-inner border-b border-slate-700 no-print">
+        <div class="max-w-7xl mx-auto flex items-center gap-3">
+            <span class="moe-gold-bg text-slate-950 font-black text-xs px-3 py-1 rounded shadow shrink-0 flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-red-600 animate-ping"></span> تنويهات المدرسة
+            </span>
+            <div class="ticker-wrap flex-1 text-sm font-semibold text-amber-100">
+                <div id="newsTickerContent" class="ticker-move"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- القسم الترحيبي والسلايدر العلوي المربوط بالمعرض -->
+    <section id="hero" class="moe-navy text-white py-12 px-4 relative overflow-hidden no-print">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div class="lg:col-span-6 space-y-5 text-center lg:text-right">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 border border-amber-400/40 text-amber-300 text-xs font-bold">
+                    <i class="fa-solid fa-star"></i> العام الدراسي 2026 / 2027 م
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-black leading-tight">
+                    مرحباً بكم في البوابة الرسمية لـ <span class="moe-gold">مدرسة رابعة الثانوية المشتركة</span>
+                </h2>
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                    نسعى لتقديم بيئة تعليمية وتربوية متكاملة تواكب التحول الرقمي ورؤية مصر 2030، مع تمكين أبنائنا وبناتنا الطلاب في شمال سيناء من تحقيق التميز الأكاديمي والمهاري.
+                </p>
+                <div class="flex flex-wrap justify-center lg:justify-start gap-3 pt-2">
+                    <a href="#schedule" class="moe-gold-bg hover:bg-amber-500 text-slate-950 font-black px-6 py-3 rounded-xl shadow-lg transition flex items-center gap-2 text-sm">
+                        <i class="fa-solid fa-calendar-days"></i> جدول الحصص الأسبوعي
+                    </a>
+                    <a href="#gallery" class="bg-slate-800/80 hover:bg-slate-700 border border-slate-600 text-white font-bold px-6 py-3 rounded-xl transition flex items-center gap-2 text-sm">
+                        <i class="fa-solid fa-images"></i> معرض الأنشطة والصور
+                    </a>
+                </div>
+            </div>
+
+            <!-- السلايدر المربوط بمعرض الصور -->
+            <div class="lg:col-span-6">
+                <div class="relative rounded-2xl overflow-hidden border-2 moe-gold-border shadow-2xl bg-slate-900 aspect-video group">
+                    <img id="heroSlideImg" src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=900&q=80" alt="صورة العرض" class="w-full h-full object-cover transition-all duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
+                    <div class="absolute bottom-4 right-4 left-4 p-4 rounded-xl bg-slate-900/85 backdrop-blur-sm border border-amber-500/30 flex justify-between items-end gap-2">
+                        <div>
+                            <span id="heroSlideTag" class="text-xs font-extrabold text-amber-400 block mb-1">أنشطة المدرسة</span>
+                            <h3 id="heroSlideTitle" class="text-sm sm:text-base font-bold text-white line-clamp-1">فعاليات الطابور الصباحي وتكريم المتفوقين</h3>
+                        </div>
+                        <div class="flex gap-1.5 shrink-0">
+                            <button onclick="prevHeroSlide()" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-white flex items-center justify-center transition"><i class="fa-solid fa-chevron-right text-xs"></i></button>
+                            <button onclick="nextHeroSlide()" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-white flex items-center justify-center transition"><i class="fa-solid fa-chevron-left text-xs"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الخدمات الإلكترونية -->
+    <section id="services" class="py-12 px-4 max-w-7xl mx-auto no-print">
+        <div class="text-center mb-8">
+            <span class="text-xs font-black text-amber-700 bg-amber-100 px-3 py-1 rounded-full">الخدمات الرقمية</span>
+            <h2 class="text-2xl font-black text-slate-900 mt-2">خدمات الطلاب والمنصات التعليمية</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div onclick="openExternalUrl('https://studentbooks.moe.gov.eg/')" class="cursor-pointer bg-white rounded-2xl p-6 shadow-sm hover:shadow-xl border-2 border-transparent hover:border-amber-500 transition group">
+                <div class="w-12 h-12 rounded-xl moe-navy text-amber-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+                    <i class="fa-solid fa-book-open-reader"></i>
+                </div>
+                <h3 class="text-lg font-black text-slate-900 mb-2 flex items-center justify-between">
+                    <span>بنك المعرفة المصري</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-xs text-amber-600"></i>
+                </h3>
+                <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                    تحميل الكتب المدرسية الإلكترونية والتقييمات الأسبوعية والأداءات الصفية من موقع وزارة التربية والتعليم مباشرة.
+                </p>
+                <span class="inline-flex items-center gap-1.5 text-xs font-extrabold text-amber-700">
+                    فتح منصة الكتب الإلكترونية <i class="fa-solid fa-chevron-left text-[10px]"></i>
+                </span>
+            </div>
+
+            <a href="#schedule" class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-xl border-2 border-transparent hover:border-amber-500 transition group block">
+                <div class="w-12 h-12 rounded-xl moe-navy text-amber-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+                    <i class="fa-solid fa-table-list"></i>
+                </div>
+                <h3 class="text-lg font-black text-slate-900 mb-2">جداول الفصول الدراسية</h3>
+                <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                    استعراض وطباعة جداول الحصص الأسبوعية لجميع فصول الصف الأول والثاني الثانوي (5 فصول لكل صف).
+                </p>
+                <span class="inline-flex items-center gap-1.5 text-xs font-extrabold text-amber-700">
+                    عرض الجداول الآن <i class="fa-solid fa-chevron-left text-[10px]"></i>
+                </span>
+            </a>
+
+            <a href="#contact" class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-xl border-2 border-transparent hover:border-amber-500 transition group block">
+                <div class="w-12 h-12 rounded-xl moe-navy text-amber-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+                    <i class="fa-solid fa-envelope-open-text"></i>
+                </div>
+                <h3 class="text-lg font-black text-slate-900 mb-2">صندوق الشكاوى والمقترحات</h3>
+                <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                    تواصل مباشر مع إدارة المدرسة لتقديم المقترحات أو الشكاوى الطلابية وأولياء الأمور ومتابعتها.
+                </p>
+                <span class="inline-flex items-center gap-1.5 text-xs font-extrabold text-amber-700">
+                    إرسال رسالة للإدارة <i class="fa-solid fa-chevron-left text-[10px]"></i>
+                </span>
+            </a>
+        </div>
+    </section>
+
+    <!-- قسم الجداول الدراسية -->
+    <section id="schedule" class="py-12 px-4 bg-slate-100 border-y border-slate-200">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-8 no-print">
+                <span class="text-xs font-black text-amber-700 bg-amber-100 px-3 py-1 rounded-full border border-amber-300">الجداول المدرسية المعتمدة</span>
+                <h2 class="text-2xl font-black text-slate-900 mt-2">جدول الحصص الأسبوعي (زمن الحصة 50 دقيقة)</h2>
+                <p class="text-xs text-slate-500 mt-1">اختر الصف الدراسي ثم الفصل لعرض أو طباعة الجدول المخصص</p>
+            </div>
+
+            <div class="flex justify-center gap-3 mb-5 no-print">
+                <button id="gradeBtn1" onclick="selectGrade(1)" class="px-5 py-2.5 rounded-xl font-black text-sm transition shadow-sm moe-navy text-white">
+                    الصف الأول الثانوي (5 فصول)
+                </button>
+                <button id="gradeBtn2" onclick="selectGrade(2)" class="px-5 py-2.5 rounded-xl font-black text-sm transition shadow-sm bg-white text-slate-700 border border-slate-300">
+                    الصف الثاني الثانوي (5 فصول)
+                </button>
+            </div>
+
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 mb-6 max-w-2xl mx-auto no-print">
+                <div class="text-xs font-bold text-slate-500 mb-2 text-center">اختر الفصل:</div>
+                <div id="classButtonsContainer" class="flex flex-wrap justify-center gap-2"></div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden">
+                <div class="p-4 bg-slate-50 border-b border-slate-200 flex flex-wrap justify-between items-center gap-3">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full moe-gold-bg"></span>
+                        <h3 id="currentScheduleTitle" class="font-black text-slate-900 text-base">الصف الأول الثانوي - فصل (1 / 1)</h3>
+                    </div>
+                    <button onclick="window.print()" class="no-print moe-navy hover:bg-slate-800 text-white text-xs font-bold px-4 py-2 rounded-lg transition flex items-center gap-2">
+                        <i class="fa-solid fa-print"></i> طباعة جدول الفصل
+                    </button>
+                </div>
+
+                <div class="overflow-x-auto custom-scroll">
+                    <table class="w-full text-center border-collapse min-w-[780px]">
+                        <thead>
+                            <tr class="moe-navy text-white text-xs">
+                                <th class="p-3 border border-slate-700 w-28">اليوم / الحصة</th>
+                                <th class="p-3 border border-slate-700">
+                                    <div>الحصة 1</div>
+                                    <div class="text-[10px] text-amber-300 font-normal mt-0.5">08:00 - 08:50 (50 د)</div>
+                                </th>
+                                <th class="p-3 border border-slate-700">
+                                    <div>الحصة 2</div>
+                                    <div class="text-[10px] text-amber-300 font-normal mt-0.5">08:50 - 09:40 (50 د)</div>
+                                </th>
+                                <th class="p-3 border border-slate-700">
+                                    <div>الحصة 3</div>
+                                    <div class="text-[10px] text-amber-300 font-normal mt-0.5">09:40 - 10:30 (50 د)</div>
+                                </th>
+                                <th class="p-3 border border-slate-700">
+                                    <div>الحصة 4</div>
+                                    <div class="text-[10px] text-amber-300 font-normal mt-0.5">10:30 - 11:20 (50 د)</div>
+                                </th>
+                                <th class="p-3 border border-slate-700 bg-amber-900/60 text-amber-300 w-32">
+                                    <div class="font-black">الفسحة المدرسية</div>
+                                    <div class="text-[10px] text-amber-200 font-normal mt-0.5">11:20 - 11:50 (30 د)</div>
+                                </th>
+                                <th class="p-3 border border-slate-700">
+                                    <div>الحصة 5 (الأخيرة)</div>
+                                    <div class="text-[10px] text-amber-300 font-normal mt-0.5">11:50 - 12:40 (50 د)</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="scheduleTableBody" class="text-sm font-bold text-slate-800 divide-y divide-slate-200"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- لوحة الشرف والمتفوقين -->
+    <section id="honors" class="py-12 px-4 max-w-7xl mx-auto no-print">
+        <div class="text-center mb-8">
+            <span class="text-xs font-black text-amber-700 bg-amber-100 px-3 py-1 rounded-full">فرسان المدرسة</span>
+            <h2 class="text-2xl font-black text-slate-900 mt-2">لوحة الشرف وأوائل الطلاب</h2>
+        </div>
+        <div id="honorsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+    </section>
+
+    <!-- معرض الصور والأنشطة -->
+    <section id="gallery" class="py-12 px-4 bg-slate-100 border-t border-slate-200 no-print">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-6">
+                <span class="text-xs font-black text-amber-700 bg-amber-100 px-3 py-1 rounded-full">التوثيق الإعلامي</span>
+                <h2 class="text-2xl font-black text-slate-900 mt-2">معرض صور وأنشطة المدرسة</h2>
+            </div>
+            <div id="galleryFiltersContainer" class="flex flex-wrap justify-center gap-2 mb-8"></div>
+            <div id="galleryGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </div>
+    </section>
+
+    <!-- قسم الشكاوى والمقترحات -->
+    <section id="contact" class="py-12 px-4 max-w-4xl mx-auto no-print">
+        <div class="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden">
+            <div class="moe-navy p-6 text-white text-center">
+                <i class="fa-solid fa-comments text-3xl moe-gold mb-2"></i>
+                <h2 class="text-xl font-black">صندوق الشكاوى والمقترحات الإلكتروني</h2>
+                <p class="text-xs text-slate-300 mt-1">تصل رسالتك مباشرة إلى لوحة تحكم إدارة المدرسة لمراجعتها</p>
+            </div>
+            <form id="complaintForm" onsubmit="submitComplaint(event)" class="p-6 space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">الاسم بالكامل *</label>
+                        <input type="text" id="compName" required placeholder="اكتب اسمك الثلاثي" class="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-amber-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">الصفة *</label>
+                        <select id="compRole" class="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-amber-500 bg-white">
+                            <option value="طالب بالمدرسة">طالب بالمدرسة</option>
+                            <option value="ولي أمر">ولي أمر</option>
+                            <option value="معلم / إداري">معلم / إداري</option>
+                            <option value="زائر">زائر</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">الفصل أو رقم الهاتف *</label>
+                        <input type="text" id="compContact" required placeholder="مثال: فصل 2/1 أو رقم الموبايل" class="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-amber-500">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">تفاصيل الشكوى أو المقترح *</label>
+                    <textarea id="compMessage" rows="3" required placeholder="اكتب رسالتك أو مقترحك بكل وضوح..." class="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-amber-500"></textarea>
+                </div>
+                <button type="submit" class="w-full moe-gold-bg hover:bg-amber-500 text-slate-950 font-black py-3 rounded-xl shadow transition flex items-center justify-center gap-2 text-sm">
+                    <i class="fa-solid fa-paper-plane"></i> إرسال الرسالة لإدارة المدرسة
+                </button>
+                <div id="compSuccessAlert" class="hidden p-3 rounded-xl bg-emerald-50 border border-emerald-300 text-emerald-800 text-xs font-bold text-center">
+                    <i class="fa-solid fa-circle-check ml-1"></i> تم إرسال رسالتك بنجاح إلى إدارة المدرسة، شكراً لتواصلك معنا.
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer class="moe-navy text-slate-300 pt-10 pb-6 px-4 border-t-4 moe-gold-border no-print">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            <div>
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-10 h-10 rounded-full bg-amber-500/20 border border-amber-400 flex items-center justify-center moe-gold">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="font-black text-white text-base">مدرسة رابعة الثانوية المشتركة</h3>
+                </div>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    صرح تعليمي تابع لإدارة بئر العبد التعليمية - مديرية التربية والتعليم بمحافظة شمال سيناء.
+                </p>
+            </div>
+            <div>
+                <h4 class="font-bold text-white text-sm mb-3 border-r-2 moe-gold-border pr-2">روابط سريعة</h4>
+                <ul class="space-y-2 text-xs">
+                    <li><a href="#schedule" class="hover:text-amber-400 transition">جداول الفصول الدراسية</a></li>
+                    <li><button onclick="openExternalUrl('https://studentbooks.moe.gov.eg/')" class="hover:text-amber-400 transition">بنك المعرفة المصري والكتب المدرسية</button></li>
+                    <li><a href="#honors" class="hover:text-amber-400 transition">لوحة الشرف والمتفوقين</a></li>
+                    <li><a href="#gallery" class="hover:text-amber-400 transition">معرض الأنشطة المدرسية</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-white text-sm mb-3 border-r-2 moe-gold-border pr-2">الإدارة المدرسية</h4>
+                <p class="text-xs text-slate-400 mb-4">العنوان: قرية رابعة - مركز بئر العبد - محافظة شمال سيناء</p>
+                <button onclick="openAdminModal()" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-400 border border-amber-500/30 text-xs font-bold transition">
+                    <i class="fa-solid fa-user-shield"></i> دخول مسؤول النظام
+                </button>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto pt-4 border-t border-slate-800 text-center text-[11px] text-slate-500">
+            جميع الحقوق محفوظة © مدرسة رابعة الثانوية المشتركة 2026
+        </div>
+    </footer>
+
+    <!-- نافذة لوحة تحكم المسؤول -->
+    <div id="adminModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden items-center justify-center p-3 sm:p-4 no-print">
+        <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[92vh] flex flex-col shadow-2xl border-2 moe-gold-border overflow-hidden">
+            
+            <div class="moe-navy text-white p-4 flex justify-between items-center shrink-0">
+                <div class="flex items-center gap-2.5">
+                    <i class="fa-solid fa-shield-halved text-xl moe-gold"></i>
+                    <div>
+                        <h3 class="font-black text-sm sm:text-base">لوحة تحكم إدارة مدرسة رابعة الثانوية</h3>
+                        <p class="text-[11px] text-slate-300">نظام إدارة المحتوى، الجداول، والمزامنة السحابية للجميع</p>
+                    </div>
+                </div>
+                <button onclick="attemptCloseAdminModal()" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-red-600 text-white flex items-center justify-center transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="p-4 sm:p-6 overflow-y-auto custom-scroll flex-1">
+                
+                <!-- شاشة تسجيل الدخول -->
+                <div id="adminLoginView" class="max-w-md mx-auto py-6 text-center space-y-4">
+                    <div class="w-16 h-16 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-2xl mx-auto">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+                    <h4 class="font-black text-lg text-slate-900">تسجيل دخول المسؤول</h4>
+                    <p class="text-xs text-slate-500">أدخل كلمة المرور الخاصة بإدارة المدرسة للمتابعة</p>
+
+                    <div id="lockoutBanner" class="hidden p-3.5 rounded-xl bg-red-50 border border-red-300 text-red-700 text-xs font-bold">
+                        <i class="fa-solid fa-clock-rotate-left ml-1"></i>
+                        تم إيقاف المحاولات مؤقتاً بسبب إدخال خاطئ. يرجى الانتظار <span id="lockoutTimerText" class="underline font-black">60</span> ثانية قبل المحاولة مجدداً.
+                    </div>
+
+                    <form onsubmit="handleAdminLogin(event)" class="space-y-3">
+                        <input type="password" id="adminPassInput" placeholder="••••••••" required class="w-full px-4 py-3 rounded-xl border border-slate-300 text-center text-lg tracking-widest focus:outline-none focus:border-amber-500">
+                        <button type="submit" id="adminLoginSubmitBtn" class="w-full moe-navy hover:bg-slate-800 text-white font-black py-3 rounded-xl transition text-sm">
+                            دخول للوحة التحكم
+                        </button>
+                    </form>
+                </div>
+
+                <!-- شاشة لوحة الإدارة بعد الدخول -->
+                <div id="adminDashboardView" class="hidden space-y-5">
+                    
+                    <div class="flex flex-wrap justify-between items-center gap-2 bg-slate-50 p-3 rounded-xl border border-slate-200">
+                        <div class="flex items-center gap-2 text-xs font-bold text-slate-700">
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                            مرحباً بك: مسؤول النظام (متصل بقاعدة بيانات rabaa-school)
+                        </div>
+                        <button onclick="logoutAdmin()" class="px-3 py-1.5 rounded-lg bg-red-50 hover:bg-red-100 text-red-600 text-xs font-bold transition flex items-center gap-1">
+                            <i class="fa-solid fa-right-from-bracket"></i> خروج
+                        </button>
+                    </div>
+
+                    <!-- شريط الحفظ اليدوي المعلق -->
+                    <div id="unsavedChangesBar" class="hidden p-3.5 rounded-xl bg-amber-50 border-2 border-amber-400 flex flex-wrap justify-between items-center gap-3">
+                        <div class="text-xs font-bold text-amber-900 flex items-center gap-2">
+                            <i class="fa-solid fa-triangle-exclamation text-amber-600 text-base"></i>
+                            <span>لديك تعديلات معلقة في المسودة! اضغط «حفظ التغييرات» لتظهر بالموقع وعند الجميع.</span>
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="commitAllAdminChanges()" class="px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black shadow transition flex items-center gap-1.5">
+                                <i class="fa-solid fa-floppy-disk"></i> حفظ التغييرات واعتمادها بالموقع
+                            </button>
+                            <button onclick="discardAllAdminChanges()" class="px-3 py-2 rounded-lg bg-white hover:bg-red-50 text-red-600 border border-red-200 text-xs font-bold transition">
+                                إلغاء
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- شريط التبويبات -->
+                    <div class="flex overflow-x-auto custom-scroll gap-1 border-b border-slate-200 pb-1 text-xs font-bold">
+                        <button onclick="switchAdminTab('tabSchedule')" id="btn_tabSchedule" class="admin-tab-btn px-3 py-2 rounded-t-lg border-b-2 border-amber-500 text-amber-700 bg-amber-50/60 whitespace-nowrap">
+                            <i class="fa-solid fa-calendar-check ml-1"></i> تعديل الجدول
+                        </button>
+                        <button onclick="switchAdminTab('tabGallery')" id="btn_tabGallery" class="admin-tab-btn px-3 py-2 rounded-t-lg border-b-2 border-transparent text-slate-600 hover:text-slate-900 whitespace-nowrap">
+                            <i class="fa-solid fa-cloud-arrow-up ml-1"></i> رفع صورة للمعرض
+                        </button>
+                        <button onclick="switchAdminTab('tabCategories')" id="btn_tabCategories" class="admin-tab-btn px-3 py-2 rounded-t-lg border-b-2 border-transparent text-slate-600 hover:text-slate-900 whitespace-nowrap">
+                            <i class="fa-solid fa-folder-tree ml-1"></i> أقسام المعرض
+                        </button>
+                        <button onclick="switchAdminTab('tabNews')" id="btn_tabNews" class="admin-tab-btn px-3 py-2 rounded-t-lg border-b-2 border-transparent text-slate-600 hover:text-slate-900 whitespace-nowrap">
+                            <i class="fa-solid fa-newspaper ml-1"></i> الأخبار العاجلة
+                        </button>
+                        <button onclick="switchAdminTab('tabHonors')" id="btn_tabHonors" class="admin-tab-btn px-3 py-2 rounded-t-lg border-b-2 border-transparent text-slate-600 hover:text-slate-900 whitespace-nowrap">
+                            <i class="fa-solid fa-award ml-1"></i> لوحة الشرف
+                        </button>
+                        <button onclick="switchAdminTab('tabComplaints')" id="btn_tabComplaints" class="admin-tab-btn px-3 py-2 rounded-t-lg border-b-2 border-transparent text-slate-600 hover:text-slate-900 whitespace-nowrap">
+                            <i class="fa-solid fa-inbox ml-1"></i> الشكاوى <span id="complaintsBadgeCount" class="px-1.5 py-0.5 rounded-full bg-red-600 text-white text-[10px]">0</span>
+                        </button>
+                        <button onclick="switchAdminTab('tabCloud')" id="btn_tabCloud" class="admin-tab-btn px-3 py-2 rounded-t-lg border-b-2 border-transparent text-emerald-700 hover:text-emerald-900 whitespace-nowrap">
+                            <i class="fa-solid fa-globe ml-1"></i> المزامنة للجميع (Firebase)
+                        </button>
+                        <button onclick="switchAdminTab('tabSecurity')" id="btn_tabSecurity" class="admin-tab-btn px-3 py-2 rounded-t-lg border-b-2 border-transparent text-slate-600 hover:text-slate-900 whitespace-nowrap">
+                            <i class="fa-solid fa-key ml-1"></i> أمان الإدارة
+                        </button>
+                    </div>
+
+                    <!-- 1. تبويب تعديل الجدول -->
+                    <div id="tabSchedule" class="admin-tab-pane space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">اختر الفصل الدراسي للتعديل *</label>
+                                <select id="adminScheduleClassSelect" onchange="loadAdminSchedulePreview()" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs font-bold bg-white">
+                                    <optgroup label="الصف الأول الثانوي">
+                                        <option value="1-1">فصل 1 / 1</option>
+                                        <option value="1-2">فصل 1 / 2</option>
+                                        <option value="1-3">فصل 1 / 3</option>
+                                        <option value="1-4">فصل 1 / 4</option>
+                                        <option value="1-5">فصل 1 / 5</option>
+                                    </optgroup>
+                                    <optgroup label="الصف الثاني الثانوي">
+                                        <option value="2-1">فصل 2 / 1</option>
+                                        <option value="2-2">فصل 2 / 2</option>
+                                        <option value="2-3">فصل 2 / 3</option>
+                                        <option value="2-4">فصل 2 / 4</option>
+                                        <option value="2-5">فصل 2 / 5</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">اليوم الدراسي *</label>
+                                <select id="adminScheduleDaySelect" onchange="loadAdminSchedulePreview()" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs font-bold bg-white">
+                                    <option value="0">الأحد</option>
+                                    <option value="1">الإثنين</option>
+                                    <option value="2">الثلاثاء</option>
+                                    <option value="3">الأربعاء</option>
+                                    <option value="4">الخميس</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">الحصة (50 دقيقة) *</label>
+                                <select id="adminSchedulePeriodSelect" onchange="loadAdminSchedulePreview()" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs font-bold bg-white">
+                                    <option value="0">الحصة 1 (08:00 - 08:50)</option>
+                                    <option value="1">الحصة 2 (08:50 - 09:40)</option>
+                                    <option value="2">الحصة 3 (09:40 - 10:30)</option>
+                                    <option value="3">الحصة 4 (10:30 - 11:20)</option>
+                                    <option value="4">الحصة 5 الأخيرة بعد الفسحة (11:50 - 12:40)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">اسم المادة الدراسية *</label>
+                                <input type="text" id="adminScheduleSubjectInput" placeholder="مثال: الفيزياء / اللغة العربية" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs font-bold">
+                            </div>
+                        </div>
+
+                        <button onclick="stageScheduleCellUpdate()" class="w-full moe-gold-bg hover:bg-amber-500 text-slate-950 font-black py-2.5 rounded-xl text-xs transition">
+                            <i class="fa-solid fa-check ml-1"></i> إدراج تعديل الحصة في المسودة
+                        </button>
+                    </div>
+
+                    <!-- 2. تبويب رفع صورة للمعرض -->
+                    <div id="tabGallery" class="admin-tab-pane hidden space-y-4">
+                        <div class="space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">اختر ملف الصورة من الموبايل أو الجهاز *</label>
+                                <input type="file" id="adminGalleryFileInput" accept="image/*" class="w-full text-xs bg-white p-2 rounded-xl border border-slate-300">
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1">عنوان أو وصف الصورة *</label>
+                                    <input type="text" id="adminGalleryTitleInput" placeholder="مثال: تكريم أوائل الطلبة في الطابور" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1">قسم المعرض *</label>
+                                    <select id="adminGalleryCategorySelect" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs bg-white"></select>
+                                </div>
+                            </div>
+                            <button onclick="stageNewGalleryImage()" class="w-full moe-gold-bg hover:bg-amber-500 text-slate-950 font-black py-2.5 rounded-xl text-xs transition">
+                                <i class="fa-solid fa-plus ml-1"></i> إضافة الصورة للمعرض والسلايدر العلوي
+                            </button>
+                        </div>
+
+                        <div>
+                            <h5 class="text-xs font-black text-slate-700 mb-2">الصور المرفوعة حالياً:</h5>
+                            <div id="adminGalleryList" class="space-y-2 max-h-56 overflow-y-auto custom-scroll"></div>
+                        </div>
+                    </div>
+
+                    <!-- 3. تبويب أقسام المعرض -->
+                    <div id="tabCategories" class="admin-tab-pane hidden space-y-4">
+                        <div class="flex gap-2">
+                            <input type="text" id="newCategoryNameInput" placeholder="اكتب اسم قسم جديد" class="flex-1 px-3 py-2 rounded-xl border border-slate-300 text-xs">
+                            <button onclick="stageAddCategory()" class="moe-gold-bg hover:bg-amber-500 text-slate-950 font-black px-4 py-2 rounded-xl text-xs shrink-0">
+                                + إضافة قسم
+                            </button>
+                        </div>
+                        <div id="adminCategoriesList" class="space-y-2"></div>
+                    </div>
+
+                    <!-- 4. تبويب الأخبار العاجلة -->
+                    <div id="tabNews" class="admin-tab-pane hidden space-y-4">
+                        <div class="flex gap-2">
+                            <input type="text" id="adminNewsInput" placeholder="اكتب نص الخبر العاجل أو التنويه..." class="flex-1 px-3 py-2 rounded-xl border border-slate-300 text-xs">
+                            <button onclick="stageAddNewsItem()" class="moe-gold-bg hover:bg-amber-500 text-slate-950 font-black px-4 py-2 rounded-xl text-xs shrink-0">
+                                + إضافة الخبر
+                            </button>
+                        </div>
+                        <div id="adminNewsListContainer" class="space-y-2"></div>
+                    </div>
+
+                    <!-- 5. تبويب لوحة الشرف -->
+                    <div id="tabHonors" class="admin-tab-pane hidden space-y-4">
+                        <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 space-y-3">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1">اسم الطالب / الطالبة *</label>
+                                    <input type="text" id="honorNameInput" placeholder="مثال: زياد محمد" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1">المركز أو اللقب *</label>
+                                    <input type="text" id="honorRankInput" placeholder="مثال: المركز الأول" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1">الصف / الشعبة *</label>
+                                    <input type="text" id="honorGradeInput" placeholder="مثال: الصف الثاني الثانوي" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1">النسبة المئوية أو المجموع *</label>
+                                    <input type="text" id="honorScoreInput" placeholder="مثال: 98.5%" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">صورة الطالب (اختياري)</label>
+                                <input type="file" id="honorPhotoInput" accept="image/*" class="w-full text-xs bg-white p-2 rounded-xl border border-slate-300">
+                            </div>
+                            <button onclick="stageSaveHonorStudent()" class="w-full moe-gold-bg hover:bg-amber-500 text-slate-950 font-black py-2 rounded-xl text-xs">
+                                + إدراج الطالب في لوحة الشرف
+                            </button>
+                        </div>
+                        <div id="adminHonorsList" class="space-y-2 max-h-52 overflow-y-auto custom-scroll"></div>
+                    </div>
+
+                    <!-- 6. تبويب الشكاوى -->
+                    <div id="tabComplaints" class="admin-tab-pane hidden space-y-3">
+                        <div id="adminComplaintsList" class="space-y-2.5 max-h-72 overflow-y-auto custom-scroll"></div>
+                    </div>
+
+                    <!-- 7. تبويب المزامنة السحابية للجميع -->
+                    <div id="tabCloud" class="admin-tab-pane hidden space-y-4">
+                        <div class="p-4 rounded-xl bg-emerald-50 border border-emerald-200 space-y-3">
+                            <h5 class="font-black text-emerald-950 text-sm flex items-center gap-2">
+                                <i class="fa-solid fa-cloud-bolt text-emerald-600"></i>
+                                متصل بقاعدة بيانات: rabaa-school
+                            </h5>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">رابط Firebase Realtime Database URL:</label>
+                                <input type="url" id="firebaseDbUrlInput" dir="ltr" value="https://rabaa-school-default-rtdb.firebaseio.com" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs font-mono bg-white">
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <button onclick="saveFirebaseUrlAndSync()" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black transition">
+                                    <i class="fa-solid fa-link ml-1"></i> مزامنة ورفع البيانات الحالية للجميع الآن
+                                </button>
+                                <button onclick="pullFromCloudNow()" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold transition">
+                                    <i class="fa-solid fa-cloud-arrow-down ml-1"></i> جلب آخر التحديثات من السحابة
+                                </button>
+                            </div>
+                            <div id="cloudConfigStatusMsg" class="text-xs font-bold text-emerald-700"></div>
+                        </div>
+                    </div>
+
+                    <!-- 8. تبويب أمان الإدارة -->
+                    <div id="tabSecurity" class="admin-tab-pane hidden space-y-3">
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                            <h5 class="text-xs font-black text-slate-800">تغيير كلمة مرور المسؤول</h5>
+                            <input type="password" id="newAdminPassInput" placeholder="أدخل كلمة المرور الجديدة" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs">
+                            <button onclick="changeAdminPassword()" class="moe-navy text-white text-xs font-bold px-4 py-2.5 rounded-xl">
+                                تحديث كلمة المرور
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- زر الحفظ النهائي الثابت أسفل لوحة التحكم -->
+                    <div class="pt-3 border-t border-slate-200 flex justify-between items-center gap-3">
+                        <span id="draftFooterIndicator" class="text-xs font-bold text-slate-500">لا توجد تعديلات معلقة حالياً</span>
+                        <button onclick="commitAllAdminChanges()" class="px-6 py-2.5 rounded-xl moe-navy hover:bg-slate-800 text-amber-400 font-black text-xs shadow-lg transition flex items-center gap-2">
+                            <i class="fa-solid fa-floppy-disk"></i> حفظ واعتماد كافة التغييرات بالموقع
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // رابط قاعدة البيانات السحابية المدمج لمشروع rabaa-school
+        const DEFAULT_FIREBASE_DB_URL = "https://rabaa-school-default-rtdb.firebaseio.com";
+
+        function getFirebaseDbUrl() {
+            const saved = localStorage.getItem('rabaa_firebase_url_v1') || DEFAULT_FIREBASE_DB_URL;
+            return saved ? saved.trim().replace(/\/+$/, '') : '';
+        }
+
+        const daysList = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس'];
+
+        const defaultNews = [
+            'انتظام الدراسة بمدرسة رابعة الثانوية المشتركة والالتزام بالحضور في طابور الصباح الساعة 7:45 صباحاً.',
+            'تم تعديل زمن الحصة الدراسية إلى 50 دقيقة مع تخصيص 30 دقيقة للفسحة بعد الحصة الرابعة.',
+            'يمكن لجميع الطلاب تحميل الكتب المدرسية والتقييمات الأسبوعية عبر بطاقة بنك المعرفة المصري بالموقع.'
+        ];
+
+        const defaultCategories = ['طابور الصباح', 'أنشطة رياضية', 'معامل التطوير'];
+
+        const defaultGallery = [
+            {
+                id: 'img-1',
+                title: 'فعاليات الطابور الصباحي وتحية العلم بمدرسة رابعة الثانوية',
+                category: 'طابور الصباح',
+                url: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=900&q=80'
+            },
+            {
+                id: 'img-2',
+                title: 'تدريبات الفرق الرياضية والمسابقات المدرسية بالملعب',
+                category: 'أنشطة رياضية',
+                url: 'https://images.unsplash.com/photo-1526676037777-05a232554f77?auto=format&fit=crop&w=900&q=80'
+            },
+            {
+                id: 'img-3',
+                title: 'تفعيل الشاشات التفاعلية ومعامل الحاسب الآلي والتابلت',
+                category: 'معامل التطوير',
+                url: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=900&q=80'
+            }
+        ];
+
+        const defaultHonors = [
+            { id: 'h1', name: 'أحمد محمد إبراهيم', rank: 'المركز الأول', grade: 'الصف الأول الثانوي', score: '98.8%', photo: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80' },
+            { id: 'h2', name: 'مريم محمود حسن', rank: 'المركز الثاني', grade: 'الصف الثاني الثانوي - علمي', score: '97.9%', photo: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80' },
+            { id: 'h3', name: 'عمر خالد سليمان', rank: 'المركز الأول', grade: 'الصف الثاني الثانوي - أدبي', score: '96.5%', photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80' },
+            { id: 'h4', name: 'نورهان طارق علي', rank: 'الطالبة المثالية', grade: 'الصف الأول الثانوي', score: '96.2%', photo: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&q=80' }
+        ];
+
+        function buildDefaultSchedules() {
+            const data = {};
+            const g1Base = [
+                ['اللغة العربية', 'اللغة الإنجليزية', 'العلوم المتكاملة', 'الرياضيات', 'الفلسفة والمنطق'],
+                ['الرياضيات', 'التاريخ', 'اللغة العربية', 'اللغة الإنجليزية', 'تربية رياضية'],
+                ['العلوم المتكاملة', 'اللغة الفرنسية', 'الرياضيات', 'التاريخ', 'تربية دينية'],
+                ['اللغة الإنجليزية', 'اللغة العربية', 'الفلسفة والمنطق', 'حاسب آلي', 'نشاط علمي'],
+                ['التاريخ', 'العلوم المتكاملة', 'اللغة الفرنسية', 'اللغة العربية', 'مكتبة وبحث']
+            ];
+            const g2Base = [
+                ['اللغة العربية', 'الفيزياء', 'الرياضيات التطبيقية', 'اللغة الإنجليزية', 'الكيمياء'],
+                ['الكيمياء', 'اللغة الإنجليزية', 'الأحياء', 'اللغة العربية', 'تربية رياضية'],
+                ['الرياضيات البحتة', 'اللغة الفرنسية', 'الفيزياء', 'الكيمياء', 'تربية دينية'],
+                ['الأحياء', 'اللغة العربية', 'اللغة الإنجليزية', 'الرياضيات البحتة', 'تكنولوجيا معلومات'],
+                ['الفيزياء', 'الرياضيات التطبيقية', 'اللغة الفرنسية', 'الأحياء', 'نشاط طلابي']
+            ];
+            for (let c = 1; c <= 5; c++) {
+                data[`1-${c}`] = JSON.parse(JSON.stringify(g1Base));
+                data[`2-${c}`] = JSON.parse(JSON.stringify(g2Base));
+            }
+            return data;
+        }
+
+        let liveState = {
+            schedules: JSON.parse(localStorage.getItem('rabaa_schedules_v2')) || buildDefaultSchedules(),
+            news: JSON.parse(localStorage.getItem('rabaa_news_v2')) || defaultNews,
+            categories: JSON.parse(localStorage.getItem('rabaa_cats_v2')) || defaultCategories,
+            gallery: JSON.parse(localStorage.getItem('rabaa_gallery_v2')) || defaultGallery,
+            honors: JSON.parse(localStorage.getItem('rabaa_honors_v2')) || defaultHonors,
+            complaints: JSON.parse(localStorage.getItem('rabaa_complaints_v2')) || []
+        };
+
+        let draftState = null;
+        let hasUnsavedChanges = false;
+        let selectedGrade = 1;
+        let selectedClass = 1;
+        let activeGalleryFilter = 'الكل';
+        let heroSlideIdx = 0;
+        let heroInterval = null;
+        let isAdminLoggedIn = false;
+        let lockoutInterval = null;
+
+        async function fetchCloudStateOnLoad() {
+            const dbUrl = getFirebaseDbUrl();
+            if (!dbUrl) return;
+            try {
+                const res = await fetch(`${dbUrl}/school_portal_data.json`);
+                if (res.ok) {
+                    const cloudData = await res.json();
+                    if (cloudData) {
+                        if (cloudData.schedules) liveState.schedules = cloudData.schedules;
+                        if (cloudData.news) liveState.news = cloudData.news;
+                        if (cloudData.categories) liveState.categories = cloudData.categories;
+                        if (cloudData.gallery) liveState.gallery = cloudData.gallery;
+                        if (cloudData.honors) liveState.honors = cloudData.honors;
+                        if (cloudData.complaints) liveState.complaints = cloudData.complaints;
+                        saveLiveToLocalStorage();
+                        renderAllPublicSections();
+                    }
+                    document.getElementById('cloudStatusBanner').classList.remove('hidden');
+                }
+            } catch (e) {
+                console.warn('Cloud fetch skipped:', e);
+            }
+        }
+
+        async function pushLiveStateToCloud() {
+            const dbUrl = getFirebaseDbUrl();
+            if (!dbUrl) return false;
+            try {
+                const res = await fetch(`${dbUrl}/school_portal_data.json`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(liveState)
+                });
+                if (res.ok) {
+                    document.getElementById('cloudStatusBanner').classList.remove('hidden');
+                    return true;
+                }
+            } catch (e) {
+                console.error('Cloud push error:', e);
+            }
+            return false;
+        }
+
+        async function saveFirebaseUrlAndSync() {
+            const urlInput = document.getElementById('firebaseDbUrlInput').value.trim();
+            const statusEl = document.getElementById('cloudConfigStatusMsg');
+            if (!urlInput.startsWith('https://')) {
+                statusEl.textContent = 'يرجى إدخال رابط Firebase صحيح يبدأ بـ https://';
+                statusEl.className = 'text-xs font-bold text-red-600';
+                return;
+            }
+            localStorage.setItem('rabaa_firebase_url_v1', urlInput);
+            statusEl.textContent = 'جاري الاتصال بالسحابة ومزامنة البيانات للجميع...';
+            statusEl.className = 'text-xs font-bold text-amber-600';
+            const ok = await pushLiveStateToCloud();
+            if (ok) {
+                statusEl.textContent = 'تم الربط السحابي بنجاح! أي تعديل تحفظه يظهر عند كل الزوار فوراً.';
+                statusEl.className = 'text-xs font-bold text-emerald-700';
+            } else {
+                statusEl.textContent = 'تعذر الكتابة في الرابط، تأكد من تفعيل Rules على true.';
+                statusEl.className = 'text-xs font-bold text-red-600';
+            }
+        }
+
+        async function pullFromCloudNow() {
+            await fetchCloudStateOnLoad();
+            if (isAdminLoggedIn) {
+                draftState = JSON.parse(JSON.stringify(liveState));
+                renderAllAdminLists();
+            }
+            alert('تم جلب أحدث البيانات من السحابة بنجاح.');
+        }
+
+        function saveLiveToLocalStorage() {
+            localStorage.setItem('rabaa_schedules_v2', JSON.stringify(liveState.schedules));
+            localStorage.setItem('rabaa_news_v2', JSON.stringify(liveState.news));
+            localStorage.setItem('rabaa_cats_v2', JSON.stringify(liveState.categories));
+            localStorage.setItem('rabaa_gallery_v2', JSON.stringify(liveState.gallery));
+            localStorage.setItem('rabaa_honors_v2', JSON.stringify(liveState.honors));
+            localStorage.setItem('rabaa_complaints_v2', JSON.stringify(liveState.complaints));
+        }
+
+        function openExternalUrl(url) {
+            const win = window.open(url, '_blank', 'noopener,noreferrer');
+            if (!win) window.location.href = url;
+        }
+
+        function renderDateHeader() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('currentDateDisplay').textContent = now.toLocaleDateString('ar-EG', options);
+        }
+
+        function renderNewsTicker() {
+            const ticker = document.getElementById('newsTickerContent');
+            if (!liveState.news.length) {
+                ticker.textContent = 'مرحباً بكم في البوابة الرسمية لمدرسة رابعة الثانوية المشتركة';
+                return;
+            }
+            ticker.innerHTML = liveState.news.map(n => `<span class="mx-6">✦ ${n}</span>`).join('');
+        }
+
+        function updateHeroSliderDisplay() {
+            const list = liveState.gallery.length ? liveState.gallery : defaultGallery;
+            if (heroSlideIdx >= list.length) heroSlideIdx = 0;
+            if (heroSlideIdx < 0) heroSlideIdx = list.length - 1;
+            const item = list[heroSlideIdx];
+            document.getElementById('heroSlideImg').src = item.url;
+            document.getElementById('heroSlideTag').textContent = item.category || 'أنشطة المدرسة';
+            document.getElementById('heroSlideTitle').textContent = item.title;
+        }
+
+        function nextHeroSlide() { heroSlideIdx++; updateHeroSliderDisplay(); }
+        function prevHeroSlide() { heroSlideIdx--; updateHeroSliderDisplay(); }
+
+        function selectGrade(g) {
+            selectedGrade = g;
+            selectedClass = 1;
+            document.getElementById('gradeBtn1').className = g === 1
+                ? 'px-5 py-2.5 rounded-xl font-black text-sm transition shadow-sm moe-navy text-white'
+                : 'px-5 py-2.5 rounded-xl font-black text-sm transition shadow-sm bg-white text-slate-700 border border-slate-300';
+            document.getElementById('gradeBtn2').className = g === 2
+                ? 'px-5 py-2.5 rounded-xl font-black text-sm transition shadow-sm moe-navy text-white'
+                : 'px-5 py-2.5 rounded-xl font-black text-sm transition shadow-sm bg-white text-slate-700 border border-slate-300';
+            renderClassButtons();
+            renderScheduleTable();
+        }
+
+        function selectClassRoom(c) {
+            selectedClass = c;
+            renderClassButtons();
+            renderScheduleTable();
+        }
+
+        function renderClassButtons() {
+            const container = document.getElementById('classButtonsContainer');
+            let html = '';
+            for (let c = 1; c <= 5; c++) {
+                const active = c === selectedClass;
+                html += `<button onclick="selectClassRoom(${c})" class="px-4 py-2 rounded-xl text-xs font-black transition ${
+                    active ? 'moe-gold-bg text-slate-950 shadow' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+                }">فصل ${selectedGrade} / ${c}</button>`;
+            }
+            container.innerHTML = html;
+        }
+
+        function renderScheduleTable() {
+            const key = `${selectedGrade}-${selectedClass}`;
+            const gradeTitle = selectedGrade === 1 ? 'الصف الأول الثانوي' : 'الصف الثاني الثانوي';
+            document.getElementById('currentScheduleTitle').textContent = `${gradeTitle} - فصل (${selectedGrade} / ${selectedClass})`;
+
+            const matrix = liveState.schedules[key] || buildDefaultSchedules()[key];
+            const tbody = document.getElementById('scheduleTableBody');
+
+            tbody.innerHTML = daysList.map((dayName, dIdx) => {
+                const row = matrix[dIdx] || ['-', '-', '-', '-', '-'];
+                return `<tr class="hover:bg-slate-50 transition">
+                    <td class="p-3 border border-slate-200 bg-slate-100 font-black text-slate-900">${dayName}</td>
+                    <td class="p-3 border border-slate-200">${row[0]}</td>
+                    <td class="p-3 border border-slate-200">${row[1]}</td>
+                    <td class="p-3 border border-slate-200">${row[2]}</td>
+                    <td class="p-3 border border-slate-200">${row[3]}</td>
+                    <td class="p-3 border border-amber-200 bg-amber-50/70 text-amber-900 font-extrabold text-xs">
+                        <i class="fa-solid fa-bell text-amber-600 ml-1"></i> فسحة (30 د)
+                    </td>
+                    <td class="p-3 border border-slate-200">${row[4]}</td>
+                </tr>`;
+            }).join('');
+        }
+
+        function renderHonorsSection() {
+            const grid = document.getElementById('honorsGrid');
+            grid.innerHTML = liveState.honors.map(st => `
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 text-center hover:shadow-md transition">
+                    <div class="w-20 h-20 rounded-full mx-auto mb-3 p-1 border-2 moe-gold-border overflow-hidden">
+                        <img src="${st.photo}" alt="${st.name}" class="w-full h-full object-cover rounded-full">
+                    </div>
+                    <span class="inline-block text-[11px] font-black bg-amber-100 text-amber-800 px-2.5 py-0.5 rounded-full mb-1">${st.rank}</span>
+                    <h3 class="font-black text-slate-900 text-base">${st.name}</h3>
+                    <p class="text-xs text-slate-500 mt-0.5">${st.grade}</p>
+                    <div class="mt-3 pt-2 border-t border-slate-100 text-sm font-black text-emerald-700">${st.score}</div>
+                </div>
+            `).join('');
+        }
+
+        function renderGallerySection() {
+            const filtersEl = document.getElementById('galleryFiltersContainer');
+            const allCats = ['الكل', ...liveState.categories];
+            if (!allCats.includes(activeGalleryFilter)) activeGalleryFilter = 'الكل';
+
+            filtersEl.innerHTML = allCats.map(cat => `
+                <button onclick="filterGalleryByCategory('${cat}')" class="px-4 py-2 rounded-xl text-xs font-black transition ${
+                    activeGalleryFilter === cat
+                        ? 'moe-navy text-amber-400 shadow'
+                        : 'bg-white hover:bg-slate-200 text-slate-700 border border-slate-200'
+                }">${cat}</button>
+            `).join('');
+
+            const filtered = activeGalleryFilter === 'الكل'
+                ? liveState.gallery
+                : liveState.gallery.filter(item => item.category === activeGalleryFilter);
+
+            const grid = document.getElementById('galleryGrid');
+            if (!filtered.length) {
+                grid.innerHTML = `<div class="col-span-full text-center py-8 text-xs font-bold text-slate-400">لا توجد صور مضافة في هذا القسم حالياً</div>`;
+                return;
+            }
+            grid.innerHTML = filtered.map(img => `
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200 group">
+                    <div class="aspect-video overflow-hidden bg-slate-900 relative">
+                        <img src="${img.url}" alt="${img.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <span class="absolute top-3 right-3 moe-navy text-amber-300 text-[10px] font-black px-2.5 py-1 rounded-lg">${img.category}</span>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-slate-800 text-sm line-clamp-2">${img.title}</h4>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterGalleryByCategory(cat) {
+            activeGalleryFilter = cat;
+            renderGallerySection();
+        }
+
+        async function submitComplaint(e) {
+            e.preventDefault();
+            const newComp = {
+                id: 'comp-' + Date.now(),
+                name: document.getElementById('compName').value.trim(),
+                role: document.getElementById('compRole').value,
+                contact: document.getElementById('compContact').value.trim(),
+                message: document.getElementById('compMessage').value.trim(),
+                date: new Date().toLocaleString('ar-EG'),
+                reviewed: false
+            };
+            liveState.complaints.unshift(newComp);
+            saveLiveToLocalStorage();
+            await pushLiveStateToCloud();
+
+            document.getElementById('complaintForm').reset();
+            const alertBox = document.getElementById('compSuccessAlert');
+            alertBox.classList.remove('hidden');
+            setTimeout(() => alertBox.classList.add('hidden'), 5000);
+        }
+
+        function renderAllPublicSections() {
+            renderNewsTicker();
+            updateHeroSliderDisplay();
+            renderClassButtons();
+            renderScheduleTable();
+            renderHonorsSection();
+            renderGallerySection();
+        }
+
+        function getAdminPass() {
+            return localStorage.getItem('rabaa_admin_secret_v2') || 'admin123';
+        }
+
+        function openAdminModal() {
+            const modal = document.getElementById('adminModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.getElementById('firebaseDbUrlInput').value = getFirebaseDbUrl();
+
+            if (isAdminLoggedIn) {
+                showDashboardView();
+            } else {
+                document.getElementById('adminLoginView').classList.remove('hidden');
+                document.getElementById('adminDashboardView').classList.add('hidden');
+                checkLockoutStatus();
+            }
+        }
+
+        function attemptCloseAdminModal() {
+            if (isAdminLoggedIn && hasUnsavedChanges) {
+                if (!confirm('لديك تعديلات معلقة لم يتم حفظها بعد! هل تريد إغلاق النافذة وإلغاء هذه التعديلات؟')) {
+                    return;
+                }
+                discardAllAdminChanges();
+            }
+            const modal = document.getElementById('adminModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function checkLockoutStatus() {
+            const lockUntil = parseInt(localStorage.getItem('rabaa_lock_until_v2') || '0', 10);
+            const now = Date.now();
+            const input = document.getElementById('adminPassInput');
+            const btn = document.getElementById('adminLoginSubmitBtn');
+            const banner = document.getElementById('lockoutBanner');
+            const timerSpan = document.getElementById('lockoutTimerText');
+
+            if (lockUntil > now) {
+                input.disabled = true;
+                btn.disabled = true;
+                btn.classList.add('opacity-50', 'cursor-not-allowed');
+                banner.classList.remove('hidden');
+
+                if (lockoutInterval) clearInterval(lockoutInterval);
+                const updateTick = () => {
+                    const rem = Math.ceil((lockUntil - Date.now()) / 1000);
+                    if (rem <= 0) {
+                        clearInterval(lockoutInterval);
+                        localStorage.removeItem('rabaa_lock_until_v2');
+                        input.disabled = false;
+                        btn.disabled = false;
+                        btn.classList.remove('opacity-50', 'cursor-not-allowed');
+                        banner.classList.add('hidden');
+                        input.value = '';
+                        input.focus();
+                    } else {
+                        timerSpan.textContent = rem;
+                    }
+                };
+                updateTick();
+                lockoutInterval = setInterval(updateTick, 1000);
+                return true;
+            }
+            return false;
+        }
+
+        function handleAdminLogin(e) {
+            e.preventDefault();
+            if (checkLockoutStatus()) return;
+
+            const entered = document.getElementById('adminPassInput').value;
+            if (entered === getAdminPass()) {
+                isAdminLoggedIn = true;
+                document.getElementById('adminPassInput').value = '';
+                showDashboardView();
+            } else {
+                const lockTime = Date.now() + 60000;
+                localStorage.setItem('rabaa_lock_until_v2', String(lockTime));
+                document.getElementById('adminPassInput').value = '';
+                checkLockoutStatus();
+            }
+        }
+
+        function showDashboardView() {
+            document.getElementById('adminLoginView').classList.add('hidden');
+            document.getElementById('adminDashboardView').classList.remove('hidden');
+            draftState = JSON.parse(JSON.stringify(liveState));
+            setUnsavedState(false);
+            renderAllAdminLists();
+        }
+
+        function logoutAdmin() {
+            if (hasUnsavedChanges && !confirm('لديك تعديلات غير محفوظة! هل تريد الخروج وإهمالها؟')) return;
+            isAdminLoggedIn = false;
+            hasUnsavedChanges = false;
+            draftState = null;
+            document.getElementById('adminDashboardView').classList.add('hidden');
+            document.getElementById('adminLoginView').classList.remove('hidden');
+        }
+
+        function switchAdminTab(tabId) {
+            document.querySelectorAll('.admin-tab-pane').forEach(p => p.classList.add('hidden'));
+            document.getElementById(tabId).classList.remove('hidden');
+
+            document.querySelectorAll('.admin-tab-btn').forEach(b => {
+                b.className = 'admin-tab-btn px-3 py-2 rounded-t-lg border-b-2 border-transparent text-slate-600 hover:text-slate-900 whitespace-nowrap';
+            });
+            const activeBtn = document.getElementById('btn_' + tabId);
+            if (activeBtn) {
+                activeBtn.className = 'admin-tab-btn px-3 py-2 rounded-t-lg border-b-2 border-amber-500 text-amber-700 bg-amber-50/60 whitespace-nowrap';
+            }
+        }
+
+        function setUnsavedState(dirty) {
+            hasUnsavedChanges = dirty;
+            const bar = document.getElementById('unsavedChangesBar');
+            const footerTxt = document.getElementById('draftFooterIndicator');
+            if (dirty) {
+                bar.classList.remove('hidden');
+                footerTxt.textContent = '⚠️ توجد تعديلات في المسودة بانتظار الضغط على زر الحفظ';
+                footerTxt.className = 'text-xs font-extrabold text-amber-700';
+            } else {
+                bar.classList.add('hidden');
+                footerTxt.textContent = '✓ جميع التعديلات محفوظة ومعتمدة بالموقع';
+                footerTxt.className = 'text-xs font-bold text-emerald-700';
+            }
+        }
+
+        async function commitAllAdminChanges() {
+            if (!draftState) return;
+            liveState = JSON.parse(JSON.stringify(draftState));
+            saveLiveToLocalStorage();
+            renderAllPublicSections();
+            setUnsavedState(false);
+
+            const synced = await pushLiveStateToCloud();
+            if (synced) {
+                alert('تم حفظ التغييرات ومزامنتها على السحابة لتظهر عند جميع الطلاب والزوار فوراً!');
+            } else {
+                alert('تم حفظ التغييرات محلياً بالموقع!');
+            }
+        }
+
+        function discardAllAdminChanges() {
+            draftState = JSON.parse(JSON.stringify(liveState));
+            setUnsavedState(false);
+            renderAllAdminLists();
+        }
+
+        function renderAllAdminLists() {
+            loadAdminSchedulePreview();
+            renderAdminCategoriesTab();
+            renderAdminGalleryTab();
+            renderAdminNewsTab();
+            renderAdminHonorsTab();
+            renderAdminComplaintsTab();
+        }
+
+        function loadAdminSchedulePreview() {
+            if (!draftState) return;
+            const cls = document.getElementById('adminScheduleClassSelect').value;
+            const day = parseInt(document.getElementById('adminScheduleDaySelect').value, 10);
+            const period = parseInt(document.getElementById('adminSchedulePeriodSelect').value, 10);
+            const currentSubj = draftState.schedules[cls]?.[day]?.[period] || '';
+            document.getElementById('adminScheduleSubjectInput').value = currentSubj;
+        }
+
+        function stageScheduleCellUpdate() {
+            const cls = document.getElementById('adminScheduleClassSelect').value;
+            const day = parseInt(document.getElementById('adminScheduleDaySelect').value, 10);
+            const period = parseInt(document.getElementById('adminSchedulePeriodSelect').value, 10);
+            const val = document.getElementById('adminScheduleSubjectInput').value.trim();
+            if (!val) return alert('يرجى كتابة اسم المادة الدراسية');
+
+            draftState.schedules[cls][day][period] = val;
+            setUnsavedState(true);
+            alert('تم إدراج تعديل الحصة في المسودة؛ اضغط «حفظ التغييرات» لاعتمادها.');
+        }
+
+        function renderAdminCategoriesTab() {
+            const selectEl = document.getElementById('adminGalleryCategorySelect');
+            selectEl.innerHTML = draftState.categories.map(c => `<option value="${c}">${c}</option>`).join('');
+
+            const listEl = document.getElementById('adminCategoriesList');
+            listEl.innerHTML = draftState.categories.map((cat, idx) => `
+                <div class="flex justify-between items-center p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold">
+                    <span><i class="fa-regular fa-folder text-amber-600 ml-1.5"></i> ${cat}</span>
+                    <div class="flex gap-1.5">
+                        <button onclick="stageRenameCategory(${idx})" class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-800 hover:bg-amber-200">تعديل الاسم</button>
+                        <button onclick="stageDeleteCategory(${idx})" class="px-2.5 py-1 rounded-lg bg-red-100 text-red-700 hover:bg-red-200">حذف</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function stageAddCategory() {
+            const inp = document.getElementById('newCategoryNameInput');
+            const name = inp.value.trim();
+            if (!name) return;
+            if (!draftState.categories.includes(name)) {
+                draftState.categories.push(name);
+                inp.value = '';
+                setUnsavedState(true);
+                renderAdminCategoriesTab();
+            }
+        }
+
+        function stageRenameCategory(idx) {
+            const oldName = draftState.categories[idx];
+            const newName = prompt('أدخل الاسم الجديد للقسم:', oldName);
+            if (newName && newName.trim() && newName.trim() !== oldName) {
+                const clean = newName.trim();
+                draftState.categories[idx] = clean;
+                draftState.gallery.forEach(img => {
+                    if (img.category === oldName) img.category = clean;
+                });
+                setUnsavedState(true);
+                renderAdminCategoriesTab();
+                renderAdminGalleryTab();
+            }
+        }
+
+        function stageDeleteCategory(idx) {
+            if (draftState.categories.length <= 1) return alert('يجب بقاء قسم واحد على الأقل.');
+            draftState.categories.splice(idx, 1);
+            setUnsavedState(true);
+            renderAdminCategoriesTab();
+        }
+
+        function compressImageFile(file, maxW = 900, quality = 0.75) {
+            return new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onload = (ev) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        const canvas = document.createElement('canvas');
+                        let w = img.width, h = img.height;
+                        if (w > maxW) { h = Math.round((h * maxW) / w); w = maxW; }
+                        canvas.width = w; canvas.height = h;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, w, h);
+                        resolve(canvas.toDataURL('image/jpeg', quality));
+                    };
+                    img.src = ev.target.result;
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        async function stageNewGalleryImage() {
+            const fileInput = document.getElementById('adminGalleryFileInput');
+            const title = document.getElementById('adminGalleryTitleInput').value.trim();
+            const category = document.getElementById('adminGalleryCategorySelect').value;
+
+            if (!fileInput.files.length || !title) {
+                return alert('يرجى اختيار ملف الصورة وكتابة عنوانها.');
+            }
+            const dataUrl = await compressImageFile(fileInput.files[0]);
+            draftState.gallery.unshift({
+                id: 'img-' + Date.now(),
+                title,
+                category,
+                url: dataUrl
+            });
+            fileInput.value = '';
+            document.getElementById('adminGalleryTitleInput').value = '';
+            setUnsavedState(true);
+            renderAdminGalleryTab();
+        }
+
+        function renderAdminGalleryTab() {
+            const listEl = document.getElementById('adminGalleryList');
+            listEl.innerHTML = draftState.gallery.map((img, i) => `
+                <div class="flex items-center justify-between gap-2 p-2 rounded-xl bg-slate-50 border border-slate-200 text-xs">
+                    <div class="flex items-center gap-2.5 truncate">
+                        <img src="${img.url}" class="w-12 h-9 object-cover rounded-lg shrink-0">
+                        <div class="truncate">
+                            <div class="font-bold text-slate-800 truncate">${img.title}</div>
+                            <div class="text-[10px] text-amber-700 font-semibold">${img.category}</div>
+                        </div>
+                    </div>
+                    <button onclick="stageDeleteGalleryImage(${i})" class="px-2.5 py-1 rounded-lg bg-red-100 text-red-700 hover:bg-red-200 font-bold shrink-0">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function stageDeleteGalleryImage(idx) {
+            draftState.gallery.splice(idx, 1);
+            setUnsavedState(true);
+            renderAdminGalleryTab();
+        }
+
+        function renderAdminNewsTab() {
+            const container = document.getElementById('adminNewsListContainer');
+            container.innerHTML = draftState.news.map((item, idx) => `
+                <div class="flex justify-between items-center gap-2 p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-semibold">
+                    <span class="flex-1">${item}</span>
+                    <button onclick="stageDeleteNewsItem(${idx})" class="px-2.5 py-1 rounded-lg bg-red-100 text-red-700 hover:bg-red-200 font-bold shrink-0">
+                        <i class="fa-solid fa-trash-can"></i> حذف
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function stageAddNewsItem() {
+            const inp = document.getElementById('adminNewsInput');
+            const text = inp.value.trim();
+            if (!text) return;
+            draftState.news.unshift(text);
+            inp.value = '';
+            setUnsavedState(true);
+            renderAdminNewsTab();
+        }
+
+        function stageDeleteNewsItem(idx) {
+            draftState.news.splice(idx, 1);
+            setUnsavedState(true);
+            renderAdminNewsTab();
+        }
+
+        function renderAdminHonorsTab() {
+            const listEl = document.getElementById('adminHonorsList');
+            listEl.innerHTML = draftState.honors.map((st, idx) => `
+                <div class="flex justify-between items-center gap-2 p-2 rounded-xl bg-slate-50 border border-slate-200 text-xs">
+                    <div class="flex items-center gap-2">
+                        <img src="${st.photo}" class="w-9 h-9 rounded-full object-cover">
+                        <div>
+                            <div class="font-black text-slate-900">${st.name} <span class="text-emerald-700">(${st.score})</span></div>
+                            <div class="text-[10px] text-slate-500">${st.rank} - ${st.grade}</div>
+                        </div>
+                    </div>
+                    <button onclick="stageDeleteHonor(${idx})" class="px-2.5 py-1 rounded-lg bg-red-100 text-red-700 font-bold">حذف</button>
+                </div>
+            `).join('');
+        }
+
+        async function stageSaveHonorStudent() {
+            const name = document.getElementById('honorNameInput').value.trim();
+            const rank = document.getElementById('honorRankInput').value.trim();
+            const grade = document.getElementById('honorGradeInput').value.trim();
+            const score = document.getElementById('honorScoreInput').value.trim();
+            const photoInput = document.getElementById('honorPhotoInput');
+
+            if (!name || !rank || !grade || !score) return alert('يرجى ملء بيانات الطالب المتفوق.');
+
+            let photoUrl = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80';
+            if (photoInput.files.length) {
+                photoUrl = await compressImageFile(photoInput.files[0], 350, 0.8);
+            }
+
+            draftState.honors.unshift({
+                id: 'h-' + Date.now(),
+                name, rank, grade, score, photo: photoUrl
+            });
+
+            document.getElementById('honorNameInput').value = '';
+            document.getElementById('honorRankInput').value = '';
+            document.getElementById('honorGradeInput').value = '';
+            document.getElementById('honorScoreInput').value = '';
+            photoInput.value = '';
+            setUnsavedState(true);
+            renderAdminHonorsTab();
+        }
+
+        function stageDeleteHonor(idx) {
+            draftState.honors.splice(idx, 1);
+            setUnsavedState(true);
+            renderAdminHonorsTab();
+        }
+
+        function renderAdminComplaintsTab() {
+            const badge = document.getElementById('complaintsBadgeCount');
+            const unread = draftState.complaints.filter(c => !c.reviewed).length;
+            badge.textContent = unread;
+
+            const listEl = document.getElementById('adminComplaintsList');
+            if (!draftState.complaints.length) {
+                listEl.innerHTML = `<div class="text-center py-6 text-xs text-slate-400 font-bold">لا توجد شكاوى أو مقترحات واردة حالياً</div>`;
+                return;
+            }
+            listEl.innerHTML = draftState.complaints.map((c, idx) => `
+                <div class="p-3 rounded-xl border ${c.reviewed ? 'bg-slate-50 border-slate-200' : 'bg-amber-50/70 border-amber-300'} space-y-1.5 text-xs">
+                    <div class="flex justify-between items-center">
+                        <span class="font-black text-slate-900">${c.name} <span class="text-amber-700 font-bold">(${c.role} - ${c.contact})</span></span>
+                        <span class="text-[10px] text-slate-400">${c.date}</span>
+                    </div>
+                    <p class="text-slate-700 bg-white p-2 rounded-lg border border-slate-100">${c.message}</p>
+                    <div class="flex justify-end gap-2 pt-1">
+                        <button onclick="stageToggleComplaintReviewed(${idx})" class="px-2.5 py-1 rounded-lg ${c.reviewed ? 'bg-slate-200 text-slate-700' : 'bg-emerald-100 text-emerald-800'} font-bold">
+                            ${c.reviewed ? 'تمت المراجعة ✓' : 'تأشير كـ تمت المراجعة'}
+                        </button>
+                        <button onclick="stageDeleteComplaint(${idx})" class="px-2.5 py-1 rounded-lg bg-red-100 text-red-700 font-bold">حذف</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function stageToggleComplaintReviewed(idx) {
+            draftState.complaints[idx].reviewed = !draftState.complaints[idx].reviewed;
+            setUnsavedState(true);
+            renderAdminComplaintsTab();
+        }
+
+        function stageDeleteComplaint(idx) {
+            draftState.complaints.splice(idx, 1);
+            setUnsavedState(true);
+            renderAdminComplaintsTab();
+        }
+
+        function changeAdminPassword() {
+            const newP = document.getElementById('newAdminPassInput').value.trim();
+            if (newP.length < 4) return alert('يرجى إدخال كلمة مرور لا تقل عن 4 حروف أو أرقام.');
+            localStorage.setItem('rabaa_admin_secret_v2', newP);
+            document.getElementById('newAdminPassInput').value = '';
+            alert('تم تحديث كلمة مرور المسؤول بنجاح.');
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderDateHeader();
+            renderAllPublicSections();
+            fetchCloudStateOnLoad();
+            heroInterval = setInterval(nextHeroSlide, 5000);
+        });
+    </script>
+</body>
+</html>
